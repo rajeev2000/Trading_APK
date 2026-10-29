@@ -1,0 +1,1 @@
+Write access test. This file will be removed after verification if delete permission is available.
