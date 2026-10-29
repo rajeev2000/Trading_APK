@@ -1,0 +1,82 @@
+name: Android APK Build
+
+on:
+  push:
+    branches:
+      - feat/app-foundation
+    paths-ignore:
+      - 'builds/**'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-apk:
+    name: Build and publish debug APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android build packages
+        run: sdkmanager 'platform-tools' 'platforms;android-36' 'build-tools;36.0.0'
+
+      - name: Install npm dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Generate native Android project
+        run: npx expo prebuild --platform android --non-interactive
+
+      - name: Build installable debug APK
+        run: cd android && ./gradlew assembleDebug -PreactNativeArchitectures=arm64-v8a,armeabi-v7a --no-daemon
+
+      - name: Copy APK into repository build folder
+        run: |
+          mkdir -p builds
+          cp android/app/build/outputs/apk/debug/app-debug.apk builds/Trading_APK-debug.apk
+          test -s builds/Trading_APK-debug.apk
+          ls -lh builds/Trading_APK-debug.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Trading_APK-debug
+          path: builds/Trading_APK-debug.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Commit APK to the feature branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/feat/app-foundation'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f builds/Trading_APK-debug.apk
+          if git diff --cached --quiet; then
+            echo 'APK is unchanged; no new commit is needed.'
+          else
+            git commit -m 'Add Android debug APK [skip ci]'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
