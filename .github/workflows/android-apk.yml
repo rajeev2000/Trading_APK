@@ -38,6 +38,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Verify Android SDK tools
+        run: |
+          echo "ANDROID_HOME=${ANDROID_HOME:-unset}"
+          command -v sdkmanager
+          sdkmanager --version
+
       - name: Accept Android SDK licenses and install build packages
         shell: bash
         run: |
