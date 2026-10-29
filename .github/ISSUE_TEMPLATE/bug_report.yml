@@ -1,0 +1,38 @@
+name: Bug report
+description: Report incorrect or unreliable behavior.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. ...\n2. ..."
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: App version, Android version, build profile, and whether this is demo or Supabase-backed mode.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safe
+    attributes:
+      label: Data safety
+      options:
+        - label: I have removed passwords, tokens, personal data, and account details from this report.
+          required: true
