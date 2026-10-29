@@ -1,0 +1,9 @@
+import { Link } from 'expo-router';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { themes } from '../../theme/tokens';
+import { formatMoney } from '../../lib/format';
+export default function HomeScreen() {
+ const c=themes.light;
+ return <ScrollView style={{backgroundColor:c.background}} contentContainerStyle={s.page}><Text style={[s.eyebrow,{color:c.textMuted}]}>PAPER ACCOUNT</Text><Text style={[s.heading,{color:c.text}]}>Your practice space</Text><View style={[s.card,{backgroundColor:c.surface,borderColor:c.border}]}><Text style={{color:c.textMuted}}>Virtual cash · demo</Text><Text style={[s.balance,{color:c.text}]}>{formatMoney(1000000)}</Text><Text style={{color:c.textMuted}}>Demo balance only</Text></View><View style={[s.card,{backgroundColor:c.surface,borderColor:c.border}]}><Text style={[s.section,{color:c.text}]}>Monitoring</Text><Text style={{color:c.textMuted}}>Not configured · connect a market-data provider to enable scans.</Text></View><Text style={[s.section,{color:c.text}]}>Next steps</Text><Link href="/new-session" style={[s.link,{color:c.text}]}>Create a paper session →</Link><Link href="/new-strategy" style={[s.link,{color:c.text}]}>Draft a strategy →</Link><Link href="/sign-in" style={[s.link,{color:c.text}]}>Connect Google sign-in →</Link><Text style={[s.foot,{color:c.textMuted}]}>Paper trading only. Signals are not guarantees of performance.</Text></ScrollView>;
+}
+const s=StyleSheet.create({page:{padding:24,paddingTop:32,gap:16},eyebrow:{fontSize:12,letterSpacing:1.5},heading:{fontSize:28,fontWeight:'600'},card:{borderWidth:1,borderRadius:20,padding:20,gap:8},balance:{fontSize:34,fontWeight:'600',fontVariant:['tabular-nums']},section:{fontSize:18,fontWeight:'600',marginTop:8},link:{fontSize:16,paddingVertical:6},foot:{fontSize:12,lineHeight:18,marginTop:16}});

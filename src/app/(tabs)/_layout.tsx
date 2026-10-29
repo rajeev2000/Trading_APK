@@ -1,0 +1,2 @@
+import { Tabs } from 'expo-router';
+export default function TabLayout() { return <Tabs screenOptions={{ headerShown: false, tabBarLabelStyle: { fontSize: 12 } }}><Tabs.Screen name="index" options={{ title: 'Home' }} /><Tabs.Screen name="strategies" options={{ title: 'Strategies' }} /><Tabs.Screen name="portfolio" options={{ title: 'Portfolio' }} /><Tabs.Screen name="profile" options={{ title: 'Profile' }} /></Tabs>; }
