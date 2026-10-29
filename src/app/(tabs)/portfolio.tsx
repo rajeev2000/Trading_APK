@@ -1,0 +1,5 @@
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { themes } from '../../theme/tokens';
+import { formatMoney } from '../../lib/format';
+export default function PortfolioScreen(){const c=themes.light;return <ScrollView style={{backgroundColor:c.background}} contentContainerStyle={s.page}><Text style={[s.title,{color:c.text}]}>Portfolio</Text><View style={[s.card,{backgroundColor:c.surface,borderColor:c.border}]}><Text style={{color:c.textMuted}}>Virtual starting cash</Text><Text style={[s.balance,{color:c.text}]}>{formatMoney(1000000)}</Text><Text style={{color:c.textMuted}}>Illustrative demo value; no actual funds.</Text></View><Text style={{color:c.textMuted,lineHeight:22}}>Orders, simulated fills, positions and P&L will be shown after the server-side paper ledger is implemented.</Text></ScrollView>}
+const s=StyleSheet.create({page:{padding:24,paddingTop:36,gap:20},title:{fontSize:28,fontWeight:'600'},card:{borderWidth:1,borderRadius:18,padding:20,gap:8},balance:{fontSize:32,fontWeight:'600'}});

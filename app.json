@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Trading APK",
+    "slug": "trading-apk",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "tradingapk",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "android": {
+      "package": "com.rajeev2000.tradingapk"
+    },
+    "extra": {
+      "router": {}
+    }
+  }
+}

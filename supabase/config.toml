@@ -1,0 +1,3 @@
+# Monitor endpoint uses a separate server-held secret for scheduler calls.
+[functions.monitor-strategies]
+verify_jwt = false

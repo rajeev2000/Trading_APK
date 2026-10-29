@@ -1,0 +1,36 @@
+name: Feature request
+description: Propose a feature or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: What are you trying to do?
+      placeholder: As a user, I want...
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Expected outcome
+      description: Describe the intended behaviour.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable checks that prove this is done.
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P1 - MVP
+        - P2 - Valuable improvement
+        - P3 - Optional
+    validations:
+      required: true

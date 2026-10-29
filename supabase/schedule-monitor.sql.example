@@ -1,0 +1,24 @@
+-- Example only: review against current Supabase docs before running.
+-- Enable pg_cron, pg_net and Vault in the target Supabase project first.
+-- Store a strong random MONITOR_SECRET in Supabase Edge Function secrets.
+-- Do not commit real project credentials or secrets.
+
+select vault.create_secret('https://YOUR_PROJECT_REF.supabase.co', 'project_url');
+select vault.create_secret('YOUR_SUPABASE_PUBLISHABLE_KEY', 'publishable_key');
+select vault.create_secret('REPLACE_WITH_RANDOM_MONITOR_SECRET', 'monitor_secret');
+
+select cron.schedule(
+  'trading-apk-monitor-every-30-minutes',
+  '*/30 * * * *',
+  $$
+  select net.http_post(
+    url := (select decrypted_secret from vault.decrypted_secrets where name = 'project_url') || '/functions/v1/monitor-strategies',
+    headers := jsonb_build_object(
+      'Content-Type', 'application/json',
+      'apikey', (select decrypted_secret from vault.decrypted_secrets where name = 'publishable_key'),
+      'x-monitor-secret', (select decrypted_secret from vault.decrypted_secrets where name = 'monitor_secret')
+    ),
+    body := jsonb_build_object('triggered_at', now())
+  );
+  $$
+);

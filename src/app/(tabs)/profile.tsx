@@ -1,0 +1,6 @@
+import { Link } from 'expo-router';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { themes } from '../../theme/tokens';
+import { isSupabaseConfigured } from '../../lib/supabase';
+export default function ProfileScreen(){const c=themes.light;return <ScrollView style={{backgroundColor:c.background}} contentContainerStyle={s.page}><Text style={[s.title,{color:c.text}]}>Profile & settings</Text><View style={[s.card,{backgroundColor:c.surface,borderColor:c.border}]}><Text style={{color:c.text,fontWeight:'600'}}>Connection status</Text><Text style={{color:c.textMuted}}>Supabase: {isSupabaseConfigured?'configured':'not configured'}</Text><Text style={{color:c.textMuted}}>Google SSO: setup and callback verification required</Text><Text style={{color:c.textMuted}}>AI provider: not configured</Text></View><Link href="/sign-in" style={[s.link,{color:c.text}]}>Open sign-in →</Link><Text style={{color:c.textMuted,fontSize:13,lineHeight:20}}>Light/dark design tokens are defined. The current screens use the light theme while system theme wiring is being completed.</Text></ScrollView>}
+const s=StyleSheet.create({page:{padding:24,paddingTop:36,gap:18},title:{fontSize:28,fontWeight:'600'},card:{borderWidth:1,borderRadius:18,padding:20,gap:10},link:{fontSize:16,paddingVertical:10}});

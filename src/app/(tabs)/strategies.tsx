@@ -1,0 +1,5 @@
+import { Link } from 'expo-router';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { themes } from '../../theme/tokens';
+export default function StrategiesScreen(){const c=themes.light;return <ScrollView style={{backgroundColor:c.background}} contentContainerStyle={s.page}><Text style={[s.title,{color:c.text}]}>Strategies</Text><Text style={{color:c.textMuted,lineHeight:22}}>Write an idea, review the interpretation and confirm before activating it. Strategy parsing is not connected yet.</Text><View style={[s.card,{backgroundColor:c.surface,borderColor:c.border}]}><Text style={{color:c.text,fontSize:17,fontWeight:'600'}}>No saved strategies</Text><Text style={{color:c.textMuted}}>Your drafts and scan history will appear here.</Text></View><Link href="/new-strategy" style={[s.link,{color:c.text}]}>＋ Draft a strategy</Link></ScrollView>}
+const s=StyleSheet.create({page:{padding:24,paddingTop:36,gap:18},title:{fontSize:28,fontWeight:'600'},card:{borderWidth:1,borderRadius:18,padding:20,gap:8},link:{fontSize:16,paddingVertical:12}});
