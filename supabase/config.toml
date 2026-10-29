@@ -1,0 +1,8 @@
+# Local Supabase configuration for this project.
+# The monitor function authenticates using a separate server-side secret because it is
+# invoked by a scheduler, not a signed-in mobile user.
+[functions.monitor-strategies]
+verify_jwt = false
+
+# parse-strategy keeps the default JWT verification enabled and is not implemented until
+# the AI provider's approved auth and billing model has been selected.

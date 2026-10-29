@@ -1,0 +1,52 @@
+name: Feature request
+description: Propose a feature or improvement for Trading_APK.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "Describe the user problem first. Add scope and acceptance criteria so the feature can be planned into a sprint."
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: What is difficult or impossible for the user today?
+      placeholder: As a user, I need...
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: What should become possible? Avoid prescribing a solution too early.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable conditions that prove the feature works.
+      placeholder: "- [ ] Given..., when..., then..."
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options: ["P0 - Blocker/security", "P1 - MVP critical", "P2 - Valuable", "P3 - Optional"]
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Dependencies or constraints
+      description: Market/data vendor, auth, cost, privacy, migration, accessibility, or other constraints.
+    validations:
+      required: false
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Examples or screenshots
+      description: Add a mockup, screenshot, or reference if it helps.
+    validations:
+      required: false
