@@ -6,7 +6,6 @@
     "orientation": "portrait",
     "scheme": "tradingapk",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "plugins": [
       "expo-router"
     ],

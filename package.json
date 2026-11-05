@@ -5,7 +5,7 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
+    "android": "expo run:android",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "doctor": "npx expo-doctor"
@@ -17,18 +17,27 @@
     "expo-constants": "~57.0.9",
     "expo-linking": "~57.0.5",
     "expo-router": "~57.0.4",
+    "expo-status-bar": "~57.0.1",
     "expo-web-browser": "~57.0.2",
     "react": "19.2.3",
-    "react-native": "0.86.0",
-    "react-native-safe-area-context": "~5.6.2",
-    "react-native-screens": "~4.16.0",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
     "react-native-url-polyfill": "^2.0.0",
-    "expo-status-bar": "~57.0.1"
+    "react-dom": "19.2.3",
+    "react-native-worklets": "0.10.1",
+    "react-native-reanimated": "4.5.1",
+    "expo-system-ui": "~57.0.4",
+    "expo-font": "~57.0.4"
   },
   "devDependencies": {
     "@types/react": "~19.2.3",
     "@types/node": "^22.15.30",
-    "typescript": "~5.9.3",
+    "typescript": "~6.0.3",
     "tsx": "^4.20.6"
+  },
+  "overrides": {
+    "react-native-screens": "$react-native-screens",
+    "expo-font": "$expo-font"
   }
 }

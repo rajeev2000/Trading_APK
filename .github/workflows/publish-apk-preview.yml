@@ -1,0 +1,21 @@
+name: Publish verified APK preview
+on:
+  push:
+    branches: [release/apk-preview-20261105]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble and verify APK
+        run: |
+          cat builds/apk-parts/part-*.bin > "$RUNNER_TEMP/Trading_APK.apk"
+          echo "45b5aa7af6ff6327504efdfb76bd6f9fbd6d63d38f181cb5d5a1d47322787de3  $RUNNER_TEMP/Trading_APK.apk" | sha256sum --check
+      - name: Publish preview release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release create v0.1.0-preview.20261105 "$RUNNER_TEMP/Trading_APK.apk" --target "$GITHUB_SHA" --title "Trading APK - ARM64 preview" --prerelease --notes "Installable standalone ARM64 APK for Android 7.0+. JavaScript is embedded; Expo Go and Metro are not required. Build, APK signature, ZIP integrity, TypeScript, five tests, and all 21 Expo Doctor checks passed. Android device launch has not been verified. Demo foundation only: saved sessions, complete Google OAuth, AI parsing, market monitoring, and notifications remain unfinished. Signed with a development key for preview use. SHA256: 45b5aa7af6ff6327504efdfb76bd6f9fbd6d63d38f181cb5d5a1d47322787de3."
